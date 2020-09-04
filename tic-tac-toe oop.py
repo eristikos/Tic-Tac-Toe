@@ -7,11 +7,24 @@ WHITE=(255,255,255)
 run = True
 draw_object = 'x'
 
+
 cross = pygame.transform.smoothscale(pygame.image.load(r'C:\python_projects\my_projects\tic-tac-toe\cross.png').convert(), (180,180))
 ooo = pygame.transform.smoothscale(pygame.image.load(r'C:\python_projects\my_projects\tic-tac-toe\ooo.png').convert(), (180,180))
 
+def command1():
+    print("wygrales X \n"*50)
+
+
+
+def command2():
+    print("wygrales O \n"*50)
+
+
 class Field(object):
     instancelist = []
+    circleFields = []
+    crossFields = []
+
     def __init__(self, x, y, width, height, clicked):
         self.x = x
         self.y = y
@@ -19,6 +32,7 @@ class Field(object):
         self.height = height
         self.clicked = clicked
         Field.instancelist.append(self)
+
 
     def drawrect(self):
          pygame.draw.rect(win,WHITE,[self.x, self.y, self.width, self.height])
@@ -28,10 +42,17 @@ class Field(object):
             global draw_object
             if draw_object == 'x':
                 win.blit(cross, (self.x, self.y))
+                Field.crossFields.append(Field.instancelist.index(self)+1)
+                print("pola Xowe: ", Field.crossFields)
                 draw_object = 'o'
-            else:
+
+
+            elif draw_object =='o':
                 win.blit(ooo, (self.x, self.y))
+                Field.circleFields.append(Field.instancelist.index(self)+1)
+                print("pola kolkowe: ", Field.circleFields)
                 draw_object = 'x'
+
             self.clicked=True
         else:
             pass
@@ -39,6 +60,8 @@ class Field(object):
     def test2(self):
         if pos[0] in range (self.x, self.width+self.x) and pos[1] in range (self.y, self.height+self.y):
             print("field",(Field.instancelist.index(self)+1))
+
+
 
 field1 = Field(15,15,180,180, False,)
 field2 = Field(210,15,180,180, False)
@@ -54,6 +77,7 @@ for instance in Field.instancelist:
     instance.drawrect()
 ###############################################################################
 while run:
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -64,5 +88,62 @@ while run:
             for instance in Field.instancelist:
                 instance.test()
                 instance.test2()
+
+        if 1 in Field.crossFields and 2 in Field.crossFields and 3 in Field.crossFields:
+            command1()
+            continue
+        elif 1 in Field.circleFields and 2 in Field.circleFields and 3 in Field.circleFields:
+            command2()
+            continue
+        elif 4 in Field.crossFields and 5 in Field.crossFields and 6 in Field.crossFields:
+            command1()
+            continue
+        elif 4 in Field.circleFields and 5 in Field.circleFields and 6 in Field.circleFields:
+            command2()
+            continue
+        elif 7 in Field.crossFields and 8 in Field.crossFields and 9 in Field.crossFields:
+            command1()
+            continue
+        elif 7 in Field.circleFields and 8 in Field.circleFields and 9 in Field.circleFields:
+            command2()
+            continue
+        elif 1 in Field.crossFields and 4 in Field.crossFields and 7 in Field.crossFields:
+            command1()
+            continue
+        elif 1 in Field.circleFields and 4 in Field.circleFields and 7 in Field.circleFields:
+            command2()
+            continue
+        elif 1 in Field.crossFields and 5 in Field.crossFields and 9 in Field.crossFields:
+            command1()
+            continue
+        elif 1 in Field.circleFields and 5 in Field.circleFields and 9 in Field.circleFields:
+            command2()
+            continue
+        elif 3 in Field.crossFields and 5 in Field.crossFields and 7 in Field.crossFields:
+            command1()
+            continue
+        elif 3 in Field.circleFields and 5 in Field.circleFields and 7 in Field.circleFields:
+            command2()
+            continue
+        elif 2 in Field.crossFields and 5 in Field.crossFields and 8 in Field.crossFields:
+            command1()
+            continue
+        elif 2 in Field.circleFields and 5 in Field.circleFields and 8 in Field.circleFields:
+            command2()
+            continue
+        elif 3 in Field.crossFields and 6 in Field.crossFields and 9 in Field.crossFields:
+            command1()
+            continue
+        elif 3 in Field.circleFields and 6 in Field.circleFields and 9 in Field.circleFields:
+            command2()
+            continue
+        else:
+            pass
+
+
+
+
+
+
 
     pygame.display.update()
